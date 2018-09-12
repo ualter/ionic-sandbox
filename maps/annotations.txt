@@ -1,0 +1,7 @@
+
+
+# Install Geolocation Maps Plugin
+ionic cordova plugin add cordova-plugin-geolocation
+npm install --save @ionic-native/geolocation
+
+source: https://www.joshmorony.com/ionic-2-how-to-use-google-maps-geolocation-video-tutorial/

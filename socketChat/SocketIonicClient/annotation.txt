@@ -1,0 +1,5 @@
+# Install Socket Plugin
+npm install ng-socket-io --save
+
+# Page
+ionic g page chatRoom
