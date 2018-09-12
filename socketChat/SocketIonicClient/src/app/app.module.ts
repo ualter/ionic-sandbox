@@ -9,6 +9,7 @@ import { HomePage } from '../pages/home/home';
 
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 
+// https://github.com/bougarfaoui/ng-socket-io
 const config: SocketIoConfig = { url: 'http://localhost:3001', options: {} };
 
 @NgModule({
