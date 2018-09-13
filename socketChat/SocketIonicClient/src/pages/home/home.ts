@@ -9,16 +9,18 @@ import { SocketXpPlugin } from '../../app/app.module';
 })
 export class HomePage {
 
+  //socketXpPlugin: SocketXpPlugin = null;
+  socket: SocketXpPlugin = null;
   nickname = '';
 
-  constructor(public navCtrl: NavController, private socket: Socket, private socketXpPlugin: SocketXpPlugin) {
-
+  constructor(public navCtrl: NavController/*, private socket: Socket*/) {
   }
 
   joinChat() {
+    //this.socketXpPlugin = new SocketXpPlugin("http://192.168.0.22:3001");
+    //this.socketXpPlugin.connect();
 
-    this.socketXpPlugin = new SocketXpPlugin("http://192.168.0.22:3001");
-
+    this.socket = new SocketXpPlugin("http://192.168.0.22:3001");
     this.socket.connect();
     this.socket.emit('set-nickname', this.nickname);
     this.navCtrl.push('ChatRoomPage', { nickname: this.nickname });

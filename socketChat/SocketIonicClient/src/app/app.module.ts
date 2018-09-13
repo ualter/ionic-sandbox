@@ -23,10 +23,10 @@ export class SocketXpPlugin extends Socket {
     HomePage
   ],
   imports: [
-    BrowserModule,
-    IonicModule.forRoot(MyApp),
-    //SocketIoModule.forRoot(config)
-    SocketIoModule
+    BrowserModule
+   ,IonicModule.forRoot(MyApp)
+   ,SocketIoModule.forRoot(config)
+   //,SocketIoModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -36,7 +36,7 @@ export class SocketXpPlugin extends Socket {
   providers: [
     StatusBar,
     SplashScreen,
-    SocketXpPlugin,
+    //SocketXpPlugin,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
