@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
-import { Socket } from 'ng-socket-io';
+import { NavController, NavParams, ToastController} from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
+import { XpSocketService }  from '../../app/services/xpsocket.service';
 
-@IonicPage()
 @Component({
   selector: 'page-chat-room',
   templateUrl: 'chat-room.html',
@@ -13,7 +12,7 @@ export class ChatRoomPage {
   nickname = '';
   message = '';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private socket: Socket, private toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, private xpSocket: XpSocketService) {
     this.nickname = this.navParams.get('nickname');
 
     this.getMessages().subscribe(message => {
@@ -31,13 +30,13 @@ export class ChatRoomPage {
   }
 
   sendMessage() {
-    this.socket.emit('add-message', { text: this.message });
+    this.xpSocket.getSocket().emit('add-message', { text: this.message });
     this.message = '';
   }
 
   getMessages() {
     let observable = new Observable(observer => {
-      this.socket.on('message', (data) => {
+      this.xpSocket.getSocket().on('message', (data) => {
         observer.next(data);
       });
     })
@@ -46,7 +45,7 @@ export class ChatRoomPage {
 
   getUsers() {
     let observable = new Observable(observer => {
-      this.socket.on('users-changed', (data) => {
+      this.xpSocket.getSocket().on('users-changed', (data) => {
         observer.next(data);
       });
     });
@@ -58,7 +57,7 @@ export class ChatRoomPage {
   }
 
   ionViewWillLeave() {
-    this.socket.disconnect();
+    this.xpSocket.getSocket().disconnect();
   }
 
   showToast(msg) {

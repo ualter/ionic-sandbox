@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { Socket } from 'ng-socket-io';
-import { SocketXpPlugin } from '../../app/app.module';
+import { ChatRoomPage } from '../chat-room/chat-room';
+import { XpSocketService } from '../../app/services/xpsocket.service';
 
 @Component({
   selector: 'page-home',
@@ -9,21 +9,15 @@ import { SocketXpPlugin } from '../../app/app.module';
 })
 export class HomePage {
 
-  //socketXpPlugin: SocketXpPlugin = null;
-  socket: SocketXpPlugin = null;
   nickname = '';
 
-  constructor(public navCtrl: NavController/*, private socket: Socket*/) {
+  constructor(public navCtrl: NavController, private xpSocket: XpSocketService) {
   }
 
   joinChat() {
-    //this.socketXpPlugin = new SocketXpPlugin("http://192.168.0.22:3001");
-    //this.socketXpPlugin.connect();
-
-    this.socket = new SocketXpPlugin("http://192.168.0.22:3001");
-    this.socket.connect();
-    this.socket.emit('set-nickname', this.nickname);
-    this.navCtrl.push('ChatRoomPage', { nickname: this.nickname });
+    this.xpSocket.configSocket("http://192.168.0.22:3001");
+    this.xpSocket.getSocket().emit('set-nickname', this.nickname);
+    this.navCtrl.push(ChatRoomPage, { nickname: this.nickname });
   }
 
 }

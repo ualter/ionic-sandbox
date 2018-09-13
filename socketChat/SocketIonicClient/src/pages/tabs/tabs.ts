@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ConfigPage } from '../config/config'
-import { ChatRoomPage } from '../chat-room/chat-room'
+import { HomePage } from '../home/home'
 
 @Component({
   templateUrl: 'tabs.html',
@@ -8,7 +8,7 @@ import { ChatRoomPage } from '../chat-room/chat-room'
 export class TabsPage {
 
   tab1Root = ConfigPage;
-  tab2Root = ChatRoomPage;
+  tab2Root = HomePage;
 
   constructor() {
   }

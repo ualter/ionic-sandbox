@@ -5,20 +5,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
-import { Socket } from 'ng-socket-io';
 import { ChatRoomPage } from '../pages/chat-room/chat-room';
 import { ConfigPage } from '../pages/config/config';
 import { TabsPage } from '../pages/tabs/tabs';
+import { DataService } from './services/data.service';
+import { XpSocketService } from './services/xpsocket.service';
 
-// https://github.com/bougarfaoui/ng-socket-io
-const config: SocketIoConfig = { url: 'http://localhost:3031', options: {} };
-
-export class SocketXpPlugin extends Socket {
-  constructor(public UrlXpPlugin: string) {
-    super({url: UrlXpPlugin, options: {} });
-  }
-}
 
 @NgModule({
   declarations: [
@@ -31,8 +23,6 @@ export class SocketXpPlugin extends Socket {
   imports: [
     BrowserModule
    ,IonicModule.forRoot(MyApp)
-   ,SocketIoModule.forRoot(config)
-   //,SocketIoModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -45,7 +35,8 @@ export class SocketXpPlugin extends Socket {
   providers: [
     StatusBar,
     SplashScreen,
-    //SocketXpPlugin,
+    DataService,
+    XpSocketService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
