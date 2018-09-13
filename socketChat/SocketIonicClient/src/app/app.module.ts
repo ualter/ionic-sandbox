@@ -7,9 +7,12 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 import { Socket } from 'ng-socket-io';
+import { ChatRoomPage } from '../pages/chat-room/chat-room';
+import { ConfigPage } from '../pages/config/config';
+import { TabsPage } from '../pages/tabs/tabs';
 
 // https://github.com/bougarfaoui/ng-socket-io
-const config: SocketIoConfig = { url: 'http://localhost:3001', options: {} };
+const config: SocketIoConfig = { url: 'http://localhost:3031', options: {} };
 
 export class SocketXpPlugin extends Socket {
   constructor(public UrlXpPlugin: string) {
@@ -20,7 +23,10 @@ export class SocketXpPlugin extends Socket {
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    ChatRoomPage,
+    ConfigPage,
+    TabsPage
   ],
   imports: [
     BrowserModule
@@ -31,7 +37,10 @@ export class SocketXpPlugin extends Socket {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    ChatRoomPage,
+    ConfigPage,
+    TabsPage
   ],
   providers: [
     StatusBar,
