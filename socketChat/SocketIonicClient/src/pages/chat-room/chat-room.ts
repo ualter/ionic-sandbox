@@ -16,10 +16,12 @@ export class ChatRoomPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, private xpWsSocket: XpWebSocketService) {
     this.nickname = this.navParams.get('nickname');
 
-    this.subscription = this.xpWsSocket.connect("ws://localhost:8080/websocket/chat/" + this.nickname).subscribe(d => {
+    //this.subscription = this.xpWsSocket.connect("ws://localhost:8080/websocket/chat/" + this.nickname).subscribe(d => {
+    this.subscription = this.xpWsSocket.connect("ws://localhost:9002/").subscribe(d => {  
       console.log("Chat-Room...: " + d.data);
-      var json = JSON.parse(d.data);
-      this.messages.push(json.content);
+      //var json = JSON.parse(d.data);
+      //this.messages.push(json.content);
+      this.messages.push(d);
     });
     
     /* this.getMessages().subscribe(message => {
