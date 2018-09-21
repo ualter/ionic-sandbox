@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController} from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
-import { XpSocketService }  from '../../app/services/xpsocket.service';
+import { XpWebSocketService }  from '../../app/services/xp.web.socket.service';
 
 @Component({
   selector: 'page-chat-room',
@@ -11,45 +11,38 @@ export class ChatRoomPage {
   messages = [];
   nickname = '';
   message = '';
+  subscription = null;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, private xpSocket: XpSocketService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, private xpWsSocket: XpWebSocketService) {
     this.nickname = this.navParams.get('nickname');
 
-    this.getMessages().subscribe(message => {
-      this.messages.push(message);
+    this.subscription = this.xpWsSocket.connect("ws://localhost:8080/websocket/chat/" + this.nickname).subscribe(d => {
+      console.log("Chat-Room...: " + d.data);
+      var json = JSON.parse(d.data);
+      this.messages.push(json.content);
     });
+    
+    /* this.getMessages().subscribe(message => {
+      this.messages.push(message);
+    }); */
 
-    this.getUsers().subscribe(data => {
+    /* xpSocket.onConnection().subscribe(message => {
+      this.showToast('User: ' + message);
+    }); */
+
+   /*  this.getUsers().subscribe(data => {
       let user = data['user'];
       if (data['event'] === 'left') {
         this.showToast('User left: ' + user);
       } else {
         this.showToast('User joined: ' + user);
       }
-    });
+    }); */
   }
 
   sendMessage() {
-    this.xpSocket.getSocket().emit('add-message', { text: this.message });
+    this.xpWsSocket.getWebSocket().send(this.message);
     this.message = '';
-  }
-
-  getMessages() {
-    let observable = new Observable(observer => {
-      this.xpSocket.getSocket().on('message', (data) => {
-        observer.next(data);
-      });
-    })
-    return observable;
-  }
-
-  getUsers() {
-    let observable = new Observable(observer => {
-      this.xpSocket.getSocket().on('users-changed', (data) => {
-        observer.next(data);
-      });
-    });
-    return observable;
   }
 
   ionViewDidLoad() {
@@ -57,7 +50,7 @@ export class ChatRoomPage {
   }
 
   ionViewWillLeave() {
-    this.xpSocket.getSocket().disconnect();
+    //this.xpSocket.getWebSocket().disconnect();
   }
 
   showToast(msg) {
@@ -66,6 +59,10 @@ export class ChatRoomPage {
       duration: 2000
     });
     toast.present();
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

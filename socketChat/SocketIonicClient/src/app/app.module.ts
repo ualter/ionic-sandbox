@@ -9,7 +9,7 @@ import { ChatRoomPage } from '../pages/chat-room/chat-room';
 import { ConfigPage } from '../pages/config/config';
 import { TabsPage } from '../pages/tabs/tabs';
 import { DataService } from './services/data.service';
-import { XpSocketService } from './services/xpsocket.service';
+import { XpWebSocketService } from './services/xp.web.socket.service';
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -38,7 +38,7 @@ import { HttpClientModule } from '@angular/common/http';
     StatusBar,
     SplashScreen,
     DataService,
-    XpSocketService,
+    XpWebSocketService,
     HttpClientModule,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
