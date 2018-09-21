@@ -1,0 +1,8 @@
+{
+    "/*": {
+      "target": "https://github.com/ualter",
+      "secure": false,
+      "logLevel": "debug",
+      "changeOrigin": true
+    }
+  }

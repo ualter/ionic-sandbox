@@ -10,6 +10,7 @@ import { ConfigPage } from '../pages/config/config';
 import { TabsPage } from '../pages/tabs/tabs';
 import { DataService } from './services/data.service';
 import { XpSocketService } from './services/xpsocket.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { XpSocketService } from './services/xpsocket.service';
   imports: [
     BrowserModule
    ,IonicModule.forRoot(MyApp)
+   ,HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -37,6 +39,7 @@ import { XpSocketService } from './services/xpsocket.service';
     SplashScreen,
     DataService,
     XpSocketService,
+    HttpClientModule,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

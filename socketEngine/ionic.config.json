@@ -1,0 +1,7 @@
+{
+  "name": "socketEngine",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
