@@ -21,7 +21,7 @@ export class ChatRoomPage {
       console.log("Chat-Room...: " + d.data);
       //var json = JSON.parse(d.data);
       //this.messages.push(json.content);
-      this.messages.push(d);
+      //this.messages.push(JSON.parse("{\"from\":\"X-Plane\", \"text\":\""+ d.data +"\"}"));
     });
     
     /* this.getMessages().subscribe(message => {

@@ -8,7 +8,7 @@ import { ChatRoomPage } from '../chat-room/chat-room';
 })
 export class HomePage {
 
-  nickname = '';
+  nickname = 'Chatter';
 
   constructor(public navCtrl: NavController) {
     /* platform.ready().then((readySource) => {

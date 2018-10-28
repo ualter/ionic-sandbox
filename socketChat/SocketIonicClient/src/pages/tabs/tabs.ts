@@ -7,8 +7,8 @@ import { HomePage } from '../home/home'
 })
 export class TabsPage {
 
-  tab1Root = ConfigPage;
-  tab2Root = HomePage;
+  tab1Root = HomePage;
+  tab2Root = ConfigPage;
 
   constructor() {
   }
